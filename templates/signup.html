@@ -1,0 +1,36 @@
+<div flex="100" layout="column" layout-align="center" style="background:rgba(0,0,0,0.5)" >
+    <div layout="row" flex="60" layout-align="center">
+       <md-whiteframe style="background:white" class="md-whiteframe-16dp" layout-padding layout="column"  flex="40">
+         <div layout="row" flex="10" layout-align="center center">
+           <h1>Register User</h1>
+         </div>
+         <div layout="row" flex="20" layout-align="center center">
+           <md-input-container flex="100">
+             <label>Name</label>
+             <input ng-model="registerUser.name" type="name">
+           </md-input-container>
+        </div>
+         <div layout="row" flex="20" layout-align="center center">
+           <md-input-container flex="100">
+             <label>User Email</label>
+             <input ng-model="registerUser.email" type="email">
+           </md-input-container>
+         </div>
+         <div layout="row" flex="20" layout-align="center center">
+           <md-input-container flex="100">
+             <label>Phone</label>
+             <input ng-model="registerUser.phone" type="phone">
+           </md-input-container>
+         </div>
+         <div layout="row" flex="20" layout-align="center center">
+           <md-input-container flex="100">
+             <label>Password</label>
+             <input ng-model="registerUser.password" type="password">
+           </md-input-container>
+        </div>
+        <div layout="row" flex="10" layout-align="center center">
+          <md-button class="md-raised md-primary" ng-click="signup(registerUser)">Sign Up</md-button>
+       </div>
+       </md-whiteframe>
+    </div>
+</div>
