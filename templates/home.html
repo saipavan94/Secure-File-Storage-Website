@@ -1,5 +1,7 @@
 <div flex="100" layout="column" >
-  <div flex="30" layout="row">
+  <div ng-init="loginCheck()" flex="30" layout="row">
+    <md-button style="position:absolute;top:8%;left:68%"class="md-raised md-warn" ng-click="logout()">Delete Folder</md-button>
+
     <md-card layout="column" flex="100" >
       <div layout="row" flex="30" layout-align="center" >
         <md-input-container flex="30" style="margin-bottom:0">
@@ -8,7 +10,9 @@
            <md-option ng-repeat="folder in userFolders" value="{{folder}}">{{folder}}</md-option>
          </md-select>
        </md-input-container>
+
       </div>
+
       <div layout="row" flex="70" >
         <div layout="row" flex="50">
           <div layout="row" flex="70" layout-align="center center">
@@ -18,6 +22,7 @@
             </md-input-container>
           </div>
           <div layout="row" flex="30" layout-align="center center">
+
             <md-button class="md-raised md-primary" ng-click="createFolder(newFolderName)">Create</md-button>
             <!-- <md-button class="md-raised md-primary" ng-click="loadFiles()">Create</md-button> -->
           </div>
@@ -26,13 +31,17 @@
           <form layout="row" flex="100"  ng-controller="MyCtrl as up" name="up.upload_form">
             <div layout="row" flex="70" layout-align="center center">
               <input
+                  id = "uploadCtrl"
                  type="file"
                  ngf-select
                  ng-model="up.file"
                  name="file"
                  />            </div>
             <div layout="row" flex="30" layout-align="center center">
-              <md-button class="md-raised md-primary" ng-click="up.submit()">Upload</md-button>
+              <md-button class="md-primary md-raised" ng-click="showPrompt($event)"  >
+                Encrypt
+              </md-button>
+              <!-- <md-button class="md-raised md-primary" ng-click="up.submit()">Upload</md-button> -->
             </div>
         </form>
 
@@ -47,14 +56,20 @@
     <div ng-if="filesArray.length > 0" flex="100" >
         <div  layout="row" layout-wrap>
             <md-card layout-padding style="background: white; height: fit-content; width:48%" ng-repeat="file in filesArray track by $index" layout="row" >
-              <div flex="60" layout="row" layout-align="none center">
+              <div flex="55" layout="row" layout-align="none center">
                 {{file}}
               </div>
-              <div flex="20">
-                <md-button class="md-raised md-primary" ng-click="downloadFile(file)">Download</md-button>
+              <div flex="15">
+                <!-- <md-button class="md-raised md-primary" ng-click="downloadFile(file)">Download</md-button> -->
+                <md-button class="md-primary md-raised" ng-click="decryptPrompt($event,file)"  >
+                  Download
+                </md-button>
               </div>
-              <div flex="20">
+              <div flex="15">
                 <md-button class="md-raised md-warn" ng-click="deleteFile(file)">Delete</md-button>
+              </div>
+              <div flex="15">
+                <md-button class="md-raised" ng-click="forgotPassword(file)">FP</md-button>
               </div>
             </md-card>
         </div>

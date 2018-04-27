@@ -1,11 +1,16 @@
 .headandfooter{
   background:black;
   color:white;
-
+  padding: 1%
 }
 .mainContent{
 
 }
 body{
   height: 100%
+}
+#layout {
+  background: url('https://gdmissionsystems.com/-/media/General-Dynamics/Cyber-and-Electronic-Warfare-Systems/Images/GD-Embedded-Encryption-Hero-02-rev.ashx?h=1016&w=1788&la=en&hash=A93C085296FCA4F163B4A5F78E9A9937B15A6D67') center no-repeat;
+  background-size:100%;;
+
 }

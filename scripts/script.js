@@ -16,7 +16,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         });
       });
 
-app.controller('ctrl',function($scope,$state,$http,$mdToast){
+app.controller('ctrl',function($scope,$state,$http,$mdToast,$mdDialog){
   $scope.sample = "hello world";
   $scope.registerUser = {}
   $scope.loginUser = {}
@@ -31,16 +31,85 @@ app.controller('ctrl',function($scope,$state,$http,$mdToast){
     let id = localStorage.getItem('userId');
     $scope.userFolders = [];
     if (id.length > 3) {
-      console.log("innn");
       $state.go('home');
       $scope.userId = localStorage.getItem('userId');
       $scope.getFolderNames();
+    }else{
+      $state.go('login');
     }
   });
 
+  $scope.loginCheck = function(){
+    let id = localStorage.getItem('userId');
+    console.log(id);
+    if (id == null || id == undefined ) {
+      $state.go('login');
+    }
+    if (id.length > 3) {
+      $state.go('home');
+      $scope.userId = localStorage.getItem('userId');
+      $scope.getFolderNames();
+    }else{
+      $state.go('login');
+    }
+  }
+
+  $scope.forgotPassword = function(data){
+    console.log(data);
+    $http.get('http://269af816.ngrok.io/forgotPassword/'+$scope.userId+'/'+data).then(function(data){
+      console.log(data);
+      if (data.data.success) {
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent('Decryption Key Mailed to user !!')
+            .position('top right')
+            .hideDelay(3000)
+        );
+      }
+    });
+  }
+
+  $scope.showPrompt = function(ev) {
+  var confirm = $mdDialog.prompt()
+    .title('Enter Key To Encrypt')
+    .textContent('Your file will be encrypted using this key')
+    .initialValue('')
+    .targetEvent(ev)
+    .required(true)
+    .ok('Upload')
+    .cancel('Cancel');
+
+  $mdDialog.show(confirm).then(function(result) {
+    $scope.key = result;
+    var appElement = document.getElementById('uploadCtrl');
+    var appScope = angular.element(appElement).scope();
+    appScope.up.submit();
+  }, function() {
+    $scope.key = '';
+  });
+};
+$scope.decryptPrompt = function(ev,file) {
+    $scope.key =''
+    var confirm = $mdDialog.prompt()
+      .title('Enter Key To Decrypt')
+      .textContent('Your file will be decrypted using this key')
+      .initialValue('')
+      .targetEvent(ev)
+      .required(true)
+      .ok('Download')
+      .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function(result) {
+      $scope.downloadFile(file,result)
+      appScope.up.submit();
+    }, function() {
+      $scope.key = '';
+    });
+};
+
   $scope.login = function(data){
     console.log("login");
-    $http.post('http://localhost:3001/signinUser', data).then(function(data){
+    $http.post('http://269af816.ngrok.io/signinUser', data).then(function(data){
       if (data.data.success) {
         localStorage.setItem('userDetails', JSON.stringify(data.data));
         localStorage.setItem('userId', data.data.userId);
@@ -56,8 +125,10 @@ app.controller('ctrl',function($scope,$state,$http,$mdToast){
       }
     });
   }
+
+
   $scope.signup = function(data){
-    $http.post('http://localhost:3001/registerUser', data).then(function(data){
+    $http.post('http://269af816.ngrok.io/registerUser', data).then(function(data){
       if (data.data.success) {
         $mdToast.show(
           $mdToast.simple()
@@ -83,7 +154,7 @@ app.controller('ctrl',function($scope,$state,$http,$mdToast){
   }
   $scope.createFolder= function(data){
     console.log(data);
-    $http.get('http://localhost:3001/createFolder/'+$scope.userId+'/'+data).then(function(data){
+    $http.get('http://269af816.ngrok.io/createFolder/'+$scope.userId+'/'+data).then(function(data){
       if (data.data.success) {
         $mdToast.show(
           $mdToast.simple()
@@ -98,39 +169,51 @@ app.controller('ctrl',function($scope,$state,$http,$mdToast){
   }
 
   $scope.getFolderNames= function(){
-    console.log($scope.userId);
-    $http.get('http://localhost:3001/getFolderNames/'+$scope.userId).then(function(data){
+    $http.get('http://269af816.ngrok.io/getFolderNames/'+$scope.userId).then(function(data){
       $scope.userFolders = data.data.folders;
       $scope.selectedFolder = data.data.folders[0];
       $scope.loadFiles();
+
     });
   }
 
   $scope.loadFiles= function(){
-    $http.get('http://localhost:3001/loadFiles/'+$scope.userId+'/'+$scope.selectedFolder).then(function(data){
+    $http.get('http://269af816.ngrok.io/loadFiles/'+$scope.userId+'/'+$scope.selectedFolder).then(function(data){
       console.log(data);
       if (data.data.success) {
         if(!$scope.$$phase) {
             $scope.$apply(function () {
               $scope.filesArray = data.data.files;
-              console.log($scope.filesArray);
             });
           }else{
             $scope.filesArray = data.data.files;
-            console.log($scope.filesArray);
           }
       }
     });
   }
 
-  $scope.downloadFile = function(data){
+  $scope.logout = function(){
+    localStorage.removeItem('userDetails');
+    localStorage.removeItem('userId');
+    $state.go('login');
+  }
+
+  $scope.downloadFile = function(data,key){
     console.log(data);
-    window.location.assign(`http://localhost:3001/downloadFile/`+$scope.userId+'/'+$scope.selectedFolder+'/'+data);
+    let filedata = data
+    $http.get("http://269af816.ngrok.io/checkHash/"+$scope.userId+'/'+$scope.selectedFolder+'/'+data+'/'+key).then(function(data){
+      console.log(data);
+      if (data.data.valid) {
+        window.location.assign(`http://269af816.ngrok.io/downloadFile/`+$scope.userId+'/'+$scope.selectedFolder+'/'+filedata+'/'+key);
+      }else {
+        alert('Invalid Decryption Key, Try Again');
+      }
+    });
   }
 
   $scope.deleteFile = function(data){
     console.log(data);
-    $http.get(`http://localhost:3001/deleteFile/`+$scope.userId+'/'+$scope.selectedFolder+'/'+data).then(function(data){
+    $http.get(`http://269af816.ngrok.io/deleteFile/`+$scope.userId+'/'+$scope.selectedFolder+'/'+data).then(function(data){
       console.log(data);
       if (data.data.success) {
         $scope.loadFiles();
@@ -170,8 +253,9 @@ app.controller('MyCtrl',['Upload','$window',function(Upload,$window){
         vm.upload = function (file) {
           var appElement = document.querySelector('[ng-controller=ctrl]');
           var appScope = angular.element(appElement).scope();
+          console.log(appScope.key);
             Upload.upload({
-                url: 'http://localhost:3001/uploadFile/'+appScope.userId+'/'+appScope.selectedFolder, //webAPI exposed to upload the file
+                url: 'http://269af816.ngrok.io/uploadFile/'+appScope.userId+'/'+appScope.selectedFolder+'/'+appScope.key, //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
               console.log(resp);

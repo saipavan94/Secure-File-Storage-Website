@@ -1,4 +1,4 @@
-<div flex="100" layout="column" layout-align="center" style="background:rgba(0,0,0,0.5)" >
+<div flex="100" layout="column" layout-align="center" id="layout" >
     <div layout="row" flex="40" layout-align="center">
        <md-whiteframe style="background:white" class="md-whiteframe-16dp" layout-padding layout="column"  flex="40">
          <div layout="row" flex="15" layout-align="center center">
@@ -7,13 +7,13 @@
          <div layout="row" flex="35" layout-align="center center">
            <md-input-container flex="100">
              <label>User Email</label>
-             <input ng-model="loginUser.email" type="email">
+             <input required ng-model="loginUser.email" type="email">
            </md-input-container>
          </div>
          <div layout="row" flex="35" layout-align="center center">
            <md-input-container flex="100">
              <label>Password</label>
-             <input ng-model="loginUser.password" type="password">
+             <input required ng-model="loginUser.password" type="password">
            </md-input-container>
         </div>
         <div layout="row" flex="15" style="padding-left:15%;padding-right:15%" layout-align="space-around center">
