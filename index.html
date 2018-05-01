@@ -12,7 +12,7 @@
         SECURING FILES IN CLOUD USING CRYTOGRAPHY TECHNIQUES
       </div>
       <div flex="10">
-        <md-button class="md-raised md-warn" ng-click="logout()">Logout</md-button>
+        <md-button class="md-raised md-warn" ng-if="showLogout" ng-click="logout()">Logout</md-button>
       </div>
     </div>
     <div  layout="column" flex="90"  ui-view ></div>
