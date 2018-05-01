@@ -56,7 +56,7 @@ app.controller('ctrl',function($scope,$state,$http,$mdToast,$mdDialog){
 
   $scope.forgotPassword = function(data){
     console.log(data);
-    $http.get('https://77b08347.ngrok.io/forgotPassword/'+$scope.userId+'/'+data).then(function(data){
+    $http.get('https://altum.serveo.net/forgotPassword/'+$scope.userId+'/'+data).then(function(data){
       console.log(data);
       if (data.data.success) {
         $mdToast.show(
@@ -109,7 +109,7 @@ $scope.decryptPrompt = function(ev,file) {
 
   $scope.login = function(data){
     console.log("login");
-    $http.post('https://77b08347.ngrok.io/signinUser', data).then(function(data){
+    $http.post('https://altum.serveo.net/signinUser', data).then(function(data){
       if (data.data.success) {
         localStorage.setItem('userDetails', JSON.stringify(data.data));
         localStorage.setItem('userId', data.data.userId);
@@ -128,7 +128,7 @@ $scope.decryptPrompt = function(ev,file) {
 
 
   $scope.signup = function(data){
-    $http.post('https://77b08347.ngrok.io/registerUser', data).then(function(data){
+    $http.post('https://altum.serveo.net/registerUser', data).then(function(data){
       if (data.data.success) {
         $mdToast.show(
           $mdToast.simple()
@@ -154,7 +154,7 @@ $scope.decryptPrompt = function(ev,file) {
   }
   $scope.createFolder= function(data){
     console.log(data);
-    $http.get('https://77b08347.ngrok.io/createFolder/'+$scope.userId+'/'+data).then(function(data){
+    $http.get('https://altum.serveo.net/createFolder/'+$scope.userId+'/'+data).then(function(data){
       if (data.data.success) {
         $mdToast.show(
           $mdToast.simple()
@@ -169,7 +169,7 @@ $scope.decryptPrompt = function(ev,file) {
   }
 
   $scope.getFolderNames= function(){
-    $http.get('https://77b08347.ngrok.io/getFolderNames/'+$scope.userId).then(function(data){
+    $http.get('https://altum.serveo.net/getFolderNames/'+$scope.userId).then(function(data){
       $scope.userFolders = data.data.folders;
       $scope.selectedFolder = data.data.folders[0];
       $scope.loadFiles();
@@ -178,7 +178,7 @@ $scope.decryptPrompt = function(ev,file) {
   }
 
   $scope.loadFiles= function(){
-    $http.get('https://77b08347.ngrok.io/loadFiles/'+$scope.userId+'/'+$scope.selectedFolder).then(function(data){
+    $http.get('https://altum.serveo.net/loadFiles/'+$scope.userId+'/'+$scope.selectedFolder).then(function(data){
       console.log(data);
       if (data.data.success) {
         if(!$scope.$$phase) {
@@ -201,10 +201,10 @@ $scope.decryptPrompt = function(ev,file) {
   $scope.downloadFile = function(data,key){
     console.log(data);
     let filedata = data
-    $http.get("https://77b08347.ngrok.io/checkHash/"+$scope.userId+'/'+$scope.selectedFolder+'/'+data+'/'+key).then(function(data){
+    $http.get("https://altum.serveo.net/checkHash/"+$scope.userId+'/'+$scope.selectedFolder+'/'+data+'/'+key).then(function(data){
       console.log(data);
       if (data.data.valid) {
-        window.location.assign(`https://77b08347.ngrok.io/downloadFile/`+$scope.userId+'/'+$scope.selectedFolder+'/'+filedata+'/'+key);
+        window.location.assign(`https://altum.serveo.net/downloadFile/`+$scope.userId+'/'+$scope.selectedFolder+'/'+filedata+'/'+key);
       }else {
         alert('Invalid Decryption Key, Try Again');
       }
@@ -213,7 +213,7 @@ $scope.decryptPrompt = function(ev,file) {
 
   $scope.deleteFile = function(data){
     console.log(data);
-    $http.get(`https://77b08347.ngrok.io/deleteFile/`+$scope.userId+'/'+$scope.selectedFolder+'/'+data).then(function(data){
+    $http.get(`https://altum.serveo.net/deleteFile/`+$scope.userId+'/'+$scope.selectedFolder+'/'+data).then(function(data){
       console.log(data);
       if (data.data.success) {
         $scope.loadFiles();
@@ -255,7 +255,7 @@ app.controller('MyCtrl',['Upload','$window',function(Upload,$window){
           var appScope = angular.element(appElement).scope();
           console.log(appScope.key);
             Upload.upload({
-                url: 'https://77b08347.ngrok.io/uploadFile/'+appScope.userId+'/'+appScope.selectedFolder+'/'+appScope.key, //webAPI exposed to upload the file
+                url: 'https://altum.serveo.net/uploadFile/'+appScope.userId+'/'+appScope.selectedFolder+'/'+appScope.key, //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
               console.log(resp);
