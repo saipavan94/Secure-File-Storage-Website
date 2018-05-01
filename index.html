@@ -8,11 +8,16 @@
 <body ng-app="app" ng-controller="ctrl" ng-cloak>
   <div layout="column" layout-fill>
     <div  layout="row" flex="5" layout-align="center center" class="headandfooter">
-      SECURING IMAGES IN CLOUD USING CRYTOGRAPHY TECHNIQUES
+      <div  flex="90" style="padding-left:30%">
+        SECURING FILES IN CLOUD USING CRYTOGRAPHY TECHNIQUES
+      </div>
+      <div flex="10">
+        <md-button class="md-raised md-warn" ng-click="logout()">Logout</md-button>
+      </div>
     </div>
     <div  layout="column" flex="90"  ui-view ></div>
     <div  layout="row" flex="5" layout-align="center center" class="headandfooter" >
-        Footer
+
     </div>
 </div>
 <script
