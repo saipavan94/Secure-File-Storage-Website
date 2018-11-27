@@ -1,0 +1,59 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Update Details</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div layout="row" layout-wrap>
+        <div layout="row" flex="100" layout-align = "center">
+          <md-input-container flex = "75">
+            <label>Height</label>
+            <input ng-model="modalData.height">
+          </md-input-container>
+        </div>
+        <div layout="row" flex="100" layout-align = "center">
+
+        <md-input-container flex = "75">
+          <label>Weight</label>
+          <input ng-model="modalData.weight">
+        </md-input-container>
+      </div>
+
+        <div layout="row" flex="100" layout-align = "center">
+
+        <md-input-container flex = "75">
+          <label>Age</label>
+          <input ng-model="modalData.age">
+        </md-input-container>
+      </div>
+
+        <div layout="row" flex="100" layout-align = "center">
+
+        <md-input-container flex = "75">
+          <label>Comments</label>
+          <input ng-model="modalData.comment">
+        </md-input-container>
+      </div>
+
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer()">
+        Cancel
+      </md-button>
+      <md-button ng-click="answer(modalData)">
+        Save
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

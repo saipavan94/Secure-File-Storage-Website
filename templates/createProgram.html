@@ -1,0 +1,99 @@
+<div layout="column" layout-fill layout-align="center">
+  <div layout="row" flex="80" >
+    <div layout="row" flex="100" layout-align="center">
+
+    <md-card layout="row" flex="50" layout-wrap>
+      <div layout="row" flex="100" layout-align="center">
+        <h1>Create a New Program</h1>
+      </div>
+      <div layout="row" flex="100" layout-align="center">
+        <md-input-container flex="50" >
+          <label>Program Name</label>
+          <input required ng-model="program.name">
+        </md-input-container>
+      </div>
+      <div layout="row" flex="100" layout-align="center">
+        <md-input-container flex="50" >
+          <label>Program Description</label>
+          <input required ng-model="program.description">
+        </md-input-container>
+      </div>
+
+      <div layout="row" flex="100"  layout-align="space-around center">
+        <!-- <div layout="row" flex="50" layout-align="center" > -->
+          <!-- <div flex-gt-xs > -->
+            <md-datepicker ng-model="program.startDate" md-placeholder="Start date"></md-datepicker>
+          <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div layout="row" flex="50" layout-align="center"> -->
+          <!-- <div flex-gt-xs  > -->
+            <md-datepicker ng-model="program.endDate" md-placeholder="End date"></md-datepicker>
+          <!-- </div> -->
+        <!-- </div> -->
+      </div>
+      <div layout="row" flex="100" layout-align="space-around center">
+        <md-input-container flex-gt-md="30">
+            <label>Slot 1</label>
+            <input mdc-datetime-picker date="false" time="true" type="text" id="time" short-time="true"
+                   show-todays-date click-outside-to-close="true"
+                   placeholder="Time" auto-ok="true"
+                   min-date="minDate" minute-steps="1"
+                   format="hh:mm a"
+                   ng-change="vm.saveChange()"
+                   ng-model="program.slotTime1">
+        </md-input-container>
+        <md-input-container flex-gt-md="30">
+          <label>Slot 2</label>
+            <input mdc-datetime-picker date="false" time="true" type="text" id="time" short-time="true"
+                   show-todays-date click-outside-to-close="true"
+                   placeholder="Time" auto-ok="true"
+                   min-date="minDate" minute-steps="1"
+                   format="hh:mm a"
+                   ng-change="vm.saveChange()"
+                   ng-model="program.slotTime2">
+        </md-input-container>
+        <md-input-container flex-gt-md="30">
+          <label>Slot 3</label>
+            <input mdc-datetime-picker date="false" time="true" type="text" id="time" short-time="true"
+                   show-todays-date click-outside-to-close="true"
+                   placeholder="Time" auto-ok="true"
+                   min-date="minDate" minute-steps="1"
+                   format="hh:mm a"
+                   ng-change="vm.saveChange()"
+                   ng-model="program.slotTime3">
+        </md-input-container>
+      </div>
+      <div layout="row" flex="100" layout-align="space-around center">
+        <md-input-container flex="50" >
+          <label>Capacity 1</label>
+          <input required ng-model="program.capacity1">
+        </md-input-container>
+        <md-input-container flex="50" >
+          <label>Capacity 2</label>
+          <input required ng-model="program.capacity2">
+        </md-input-container>
+        <md-input-container flex="50" >
+          <label>Capacity 3</label>
+          <input required ng-model="program.capacity3">
+        </md-input-container>
+      </div>
+
+      <div layout="row" flex="100" layout-align="center">
+        <md-input-container flex="50" >
+          <label>Cost</label>
+          <input required ng-model="program.cost">
+        </md-input-container>
+      </div>
+      <!-- <div layout="row" flex="100" layout-align="center">
+        <md-input-container flex="50" >
+          <label>Capacity</label>
+          <input required ng-model="program.capacity">
+        </md-input-container>
+      </div> -->
+      <div layout="row" flex="100" layout-align="center">
+        <md-button class="md-raised md-primary" ng-click="createNewProgram(program)">create</md-button>
+      </div>
+    </md-card>
+  </div>
+</div>
+</div>

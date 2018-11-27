@@ -28,6 +28,13 @@
              <input ng-model="registerUser.password" type="password">
            </md-input-container>
         </div>
+        <div layout="row" flex="20"  layout-align="center center">
+          <md-radio-group ng-model="registerUser.rights" layout="row">
+            <md-radio-button value='instructor' class="md-primary">Instructor</md-radio-button>
+            <md-radio-button value='customer'> Customer </md-radio-button>
+          </md-radio-group>
+       </div>
+
         <div layout="row" flex="10" layout-align="center center">
           <md-button class="md-raised md-primary" ng-click="signup(registerUser)">Sign Up</md-button>
        </div>

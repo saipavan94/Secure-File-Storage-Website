@@ -1,0 +1,58 @@
+<div flex="100"  layout="column"  md-padding id="layout" >
+  <div ng-if="scope == 'customer'">
+    <div ng-init="initDataTable()">
+
+    </div>
+  </div>
+  <div ng-if="scope == 'instructor'">
+    <div ng-init="initProgramDataTable()">
+
+    </div>
+  </div>
+
+  <div style="padding:10%">
+    <md-button class="md-raised md-primary" style="position:absolute; top:10%;right:3%" ng-if="scope == 'customer'" ng-click="sendEmail()">Email instructor </md-button>
+    <md-button class="md-raised md-primary" style="position:absolute; top:10%;right:3%" ng-if="scope == 'instructor'" ng-click="BackToMainTable()">Back </md-button>
+
+    <table ng-hide="programsTable" id="example" class="display" style="width:100%">
+          <thead>
+                <tr>
+                    <th>Height</th>
+                    <th>Weight</th>
+                    <th>Age</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                  <th>Height</th>
+                  <th>Weight</th>
+                  <th>Age</th>
+                  <th>Comment</th>
+                </tr>
+            </tfoot>
+        </table>
+        <table ng-hide="!programsTable" id="example2" class="display" style="width:100%">
+              <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>User Id</th>
+                        <th>Email</th>
+                        <th>info </th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>User Id</th>
+                      <th>Email</th>
+                      <th> info </th>
+
+                    </tr>
+                </tfoot>
+            </table>
+      </div>
+</div>
