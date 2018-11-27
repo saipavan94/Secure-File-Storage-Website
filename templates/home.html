@@ -45,7 +45,7 @@
         </div>
 
       <div ng-if="!subP" layout="row" flex="100" layout-align="space-around">
-          <div ng-if="(program.slots.program1 && program.slots.program1.capacity > 0) || scope == 'instructor'" layout-align="center"class="" flex >
+          <div ng-if="(program.slots.program1 && program.slots.program1.capacity > 0 && scope == 'customer') || (scope == 'instructor' && program.slots.program1) " layout-align="center"class="" flex >
             <span>Program 1  ( {{program.slots.program1.time | date:'hh:mm:ss a'}} )</span>
             <div layout="row" >
               <!-- <div flex="50"> -->
@@ -59,7 +59,7 @@
                <md-button  ng-if="scope == 'customer' && subP == true" class="md-raised md-primary" ng-click="intModal(program,'program1')">Update</md-button>
             </div>
             </div>
-            <div ng-if="(program.slots.program2 && program.slots.program2.capacity > 0) || scope == 'instructor'" layout-align="center" class="" flex >
+            <div ng-if="(program.slots.program2 && program.slots.program2.capacity > 0&& scope == 'customer') || (scope == 'instructor' && program.slots.program2) " layout-align="center" class="" flex >
               <span>Program 2  ( {{program.slots.program2.time | date:'hh:mm:ss a'}} )</span>
               <div layout="row" layout-wrap>
                 <!-- <div flex="50"> -->
@@ -73,7 +73,7 @@
                <md-button  ng-if="scope == 'customer' && subP == true" class="md-raised md-primary" ng-click="intModal(program,'program2')">Update</md-button>
               </div>
               </div>
-              <div class="" ng-if="(program.slots.program3 && program.slots.program3.capacity > 0) || scope == 'instructor'" layout-align="center" flex >
+              <div class="" ng-if="(program.slots.program3 && program.slots.program3.capacity > 0&& scope == 'customer') || (scope == 'instructor' && program.slots.program3) " layout-align="center" flex >
                 <span>Program 3  ( {{program.slots.program3.time | date:'hh:mm:ss a'}} )</span>
                 <div layout="row" layout-wrap>
                   <!-- <div flex="50"> -->
