@@ -27,10 +27,10 @@
           End Date :    {{program.endDate | date:'yyyy-MM-dd'}}
           </div>
         </div>
-        <div ng-if="subP" layout="row" flex="100" layout-align="space-around">
+        <div ng-if="subP" layout="row" flex="100" layout-align="space-around center">
             <div layout-align="center"class="" flex >
-              <span> {{program.selectedSlot}} </span>
-              <div layout="row" >
+              <div layout="row" layout-align="center"> {{program.selectedSlot}} </div>
+              <div layout="row" layout-wrap layout-align="center" >
                 <!-- <div flex="50"> -->
                   <md-button ng-if="scope == 'instructor'" ng-click="programInfoPage(program,'program1')">Info</md-button>
                 <!-- </div> -->
@@ -45,9 +45,9 @@
         </div>
 
       <div ng-if="!subP" layout="row" flex="100" layout-align="space-around">
-          <div ng-if="(program.slots.program1 && program.slots.program1.capacity > 0 && scope == 'customer') || (scope == 'instructor' && program.slots.program1) " layout-align="center"class="" flex >
-            <span>Program 1  ( {{program.slots.program1.time | date:'hh:mm:ss a'}} )</span>
-            <div layout="row" >
+          <div ng-if="(program.slots.program1 && program.slots.program1.capacity > 0 && scope == 'customer') || (scope == 'instructor' && program.slots.program1) " layout-align="center" class="" flex >
+            <div  layout="row" layout-align="center">Program 1  ( {{program.slots.program1.time | date:'hh:mm:ss a'}} )</div>
+            <div layout="row" layout-wrap layout-align="center" >
               <!-- <div flex="50"> -->
                 <md-button ng-if="scope == 'instructor'" ng-click="programInfoPage(program,'program1')">Info</md-button>
               <!-- </div> -->
@@ -60,8 +60,8 @@
             </div>
             </div>
             <div ng-if="(program.slots.program2 && program.slots.program2.capacity > 0&& scope == 'customer') || (scope == 'instructor' && program.slots.program2) " layout-align="center" class="" flex >
-              <span>Program 2  ( {{program.slots.program2.time | date:'hh:mm:ss a'}} )</span>
-              <div layout="row" layout-wrap>
+              <div layout="row" layout-align="center">Program 2  ( {{program.slots.program2.time | date:'hh:mm:ss a'}} )</div>
+              <div layout="row" layout-wrap layout-align="center">
                 <!-- <div flex="50"> -->
                   <md-button ng-if="scope == 'instructor'" ng-click="programInfoPage(program,'program2')">Info</md-button>
                 <!-- </div> -->
@@ -74,8 +74,8 @@
               </div>
               </div>
               <div class="" ng-if="(program.slots.program3 && program.slots.program3.capacity > 0&& scope == 'customer') || (scope == 'instructor' && program.slots.program3) " layout-align="center" flex >
-                <span>Program 3  ( {{program.slots.program3.time | date:'hh:mm:ss a'}} )</span>
-                <div layout="row" layout-wrap>
+                <div layout="row" layout-align="center">Program 3  ( {{program.slots.program3.time | date:'hh:mm:ss a'}} )</div>
+                <div layout="row" layout-wrap layout-align="center">
                   <!-- <div flex="50"> -->
                     <md-button ng-if="scope == 'instructor'" ng-click="programInfoPage(program,'program3')">Info</md-button>
                   <!-- </div> -->

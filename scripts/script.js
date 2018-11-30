@@ -185,7 +185,8 @@ app.controller('ctrl',function($scope,$state,$http,$mdToast,$mdDialog){
     $http.post('http://localhost:3004/deleteProgram',body).then(function(data){
       $scope.yourPrograms();
       location.reload();
-    });  };
+    });
+  };
 
 
   $scope.infoPage = function(data){
